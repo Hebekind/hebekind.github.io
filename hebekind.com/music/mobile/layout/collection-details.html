@@ -1,0 +1,111 @@
+{strip}
+
+
+{include file={$_musheader}}
+ 
+
+{foreach $query as $collection}
+{assign var=pl_cover value=urldecode($collection.favorite_cover)}
+
+{if strstr($pl_cover, 'mp3_covers')}
+
+{assign var=pl_cover value="{urldecode($collection.favorite_cover)}"}
+{/if}
+
+{if $collection.owner == $this->USER.id}
+<div id="is_owner"></div>
+  <div class="mob_muss_add_tracks"><div class="mob_muss_add_ctt"><i class="plus_slideshow_photo"></i><span>{$this->lang['upload_music']}</span></div>
+	<input type="file" class="post-html5-upload-file" onchange="uploadTracks(event,this);" name="files[]" accept="audio/*" multiple="multiple" id="tracks_files" />
+ </div>
+{/if}
+<ul class="music_album_lst __alone" style="display: inherit;">
+    <li class="music_album_i">
+	{if $collection.favorite_cover}<img class="music_album_img" src="{$pl_cover}">{/if}
+        <div class="music_album_cnt">
+		{if $this->USER.id == $collection.owner}
+		<div id="upload_track_in_collection" data-collid="{$collection.id}"></div>
+		<a onclick="collectionSet(this,event);" class="music_more" data-func="menu"></a>{/if}
+            <div class="music_album_name-w">
+                <div class="music_album_name">{urldecode($collection.name)}</div>
+            </div>
+            <div class="music_album_kind">{$this->lang['collection']}. {$this->lang['Listens']} {$collection.playcount}</div>
+			{if $this->USER.id != $collection.owner}
+            <!--<div class="music_ctrls album_add">
+                <div class="base-button __modern __accept __has-icon music_ctrls_i js-add-album">
+				<a class="base-button_target" data-collection='{ldelim}"collection_id":"{$collection.id}","collection_name":"{urlencode($collection.name)}","collection_cover":"{$collection.favorite_cover}","collection_count":"{$collection.playcount}"{rdelim}' onclick="addCollection(event,this,'{$collection.id}');" role="button" data-func="add">{$this->lang['mus_add_to_my_music']}</a>
+                    <div class="base-button_bg"></div>
+                    <div aria-hidden="true" class="base-button_content"><span class="ic  ic-pls __white base-button_content_icon __empty ic16"></span>
+                        <div class="base-button_content_text">{$this->lang['mus_add_to_my_music']}</div>
+                    </div>
+                </div>
+                <div class="base-button __modern __has-icon music_ctrls_i js-album-added"><a class="base-button_target" role="button">{$this->lang['added']}</a>
+                    <div class="base-button_bg"></div>
+                    <div aria-hidden="true" class="base-button_content"><span class="ic  ic-tick base-button_content_icon __empty ic16"></span>
+                        <div class="base-button_content_text">{$this->lang['added']}</div>
+                    </div>
+                </div>
+            </div>-->
+			{/if}
+        </div>
+    </li>
+</ul>
+{/foreach}
+
+<div class="music_track_lst-w">
+<span style="display:none;" id="mus_collection_page" data-collid="{$collection_id}"></span>
+<ul class="music_track_lst">
+
+{foreach $this->collectionTracks($collection_id) as $track}
+
+    <li class="music_track_i" id="track_{$track.tid}">
+	
+        <div class="music_track_aux">
+		
+		<span class="music_track_time music_track_seek"><span>25</span>&nbsp;/&nbsp;</span>
+		
+		<span class="music_track_time">{$track.time}</span>
+		
+		<a class="music_add" data-func="add" role="button"></a>
+		
+		<a class="music_more" data-track-ap='{ldelim}"id":"pm_sec_track_{$track.tid}","artist":"{urlencode($track.artist)}","track_title":"{urlencode($track.title)}"{rdelim}' onclick="trackSet(this,event);" data-func="menu" role="button"></a>
+		
+		</div>
+		
+        <div class="music_track_cnt">
+		
+ 
+		
+		
+		
+		<div class="mob-play-track-button pButton" onclick="mmPlay(this,event);" data-mob-track='{ldelim}"id":"mob-track-{$track.tid}","artist":"{urlencode($track.artist)}","track_name":"{urlencode($track.title)}","album_name":"{urlencode($track.album)}","file":"{$this->track_path($track.path,$track.storage)}","cover":"{$this->cover_path($track.cover,$track.storage)}"{rdelim}'>
+		<div class="ai_play" style="background-image:url({$track.cover})"><i class="i_play"></i></div>
+		<div class="mob-audio-placeholder"></div>
+		</div>
+		
+		
+		
+		
+		<span class="music_track_data">
+		
+		<span class="music_track_artist" data-func="goToArtist" role="link">{$track.artist}</span>
+		
+		<span class="music_track_album">{$track.title}</span></span>
+
+        </div>
+
+    </li>
+{foreachelse}
+<div class="mobmus-empty">
+{$this->lang['No_tracks_in_this_collection']}
+</div>
+{/foreach}	
+	
+</ul>
+
+</div>
+
+
+{include file={$_musfooter}}
+
+
+{/strip}

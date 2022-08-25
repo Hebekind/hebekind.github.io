@@ -1,0 +1,49 @@
+{strip}
+
+{include file={$_musheader}}
+
+
+
+{if $this->myCollectionsCount() <= 0}
+
+<h3>{$this->lang['you_dont_have_collections']}</h3>
+
+<div class="mus_mob_add_playlist">
+ <a href="/mmusic/add-collection" hrefattr="true"><span class="glyphicon glyphicon-plus"></span>&nbsp;{$this->lang['mus_create_collection']}</a>
+ </div>
+
+
+{else}
+<div class="mus_mob_add_playlist">
+ <a href="/mmusic/add-collection" hrefattr="true"><span class="glyphicon glyphicon-plus"></span>&nbsp;{$this->lang['mus_create_collection']}</a>
+ </div>
+<div class="music_album_lst_w">
+    <ul class="music_album_lst_grid">
+
+{foreach $this->myCollections() as $collection}
+{assign var=pl_cover value=urldecode($collection.favorite_cover)}
+
+{if strstr($pl_cover, 'mp3_covers')}
+
+{assign var=pl_cover value="{urldecode($collection.favorite_cover)}"}
+{/if}
+	<li class="music_album_i m8" data-func="open" role="link">
+	<A class="mobmusic-album-a" href="/mmusic/collection/{$collection.id}" hrefattr="true">
+	{if $collection.favorite_cover}<img class="music_album_img" src="{$pl_cover}">{/if}
+            <div class="music_album_name-w">
+                <div class="music_album_name">{urldecode($collection.name)}</div>
+            </div>
+			</a>
+        </li>
+{/foreach}	
+    </ul>
+</div>
+ 
+
+{/if}
+
+
+
+{include file={$_musfooter}}
+
+{/strip}

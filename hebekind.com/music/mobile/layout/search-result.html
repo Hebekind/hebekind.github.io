@@ -1,0 +1,125 @@
+{strip}
+
+
+<div data-headername="{$this->lang['Popular']}" data-backhref="/music/popular" id="modifyheader"></div>
+
+<div class="music-search-form">
+    <div class="field input-text __has-icon __plain __search __active">
+        <div class="input-text_visual">
+            <div class="input-text_visual_inner">
+			<div class="mus-search-ic"></div><input class="input-text_element search_input" value="{$k}" id="musicSearchField" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" data-func="inputInteraction" placeholder="Search for music" maxlength="250" type="text">
+                <div class="input-text_icons">
+				<label class="input-text_icon-w __search" for="musicSearchField" aria-hidden="true">
+				<span class="ic  ic-search input-text_icon __empty ic16"></span></label>
+			
+				<div class="ui_search_reset" id="mus_search_clear" onclick="return ga('#musicSearchField').val('').focus();"><span class="blind_label">Cancel</span></div>
+				<a href="/mmusic/search/{$k}" style="display:none;" id="mus-search-a" hrefattr="true"></a>
+				
+				<label class="input-text_icon-w __progress" for="musicSearchField" aria-hidden="true">
+				<span class="ic  ic-progress input-text_icon __empty ic16"></span></label></div>
+				<label for="musicSearchField" class="input-text_visual_bg"></label></div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="music_content">
+<div class="upload-bar" id="mus-upload-bar"><ul></ul></div>
+<nav role="navigation" class="tabs">
+    <ul class="tabs_list js-tabs-list" role="menu">
+	
+		<li class="tabs_item"><a hrefattr="true" href="/mmusic/popular" class="tabs_action ai" tabindex="0">{$this->lang['Home']}</a></li>
+        <li class="tabs_item"><a hrefattr="true" href="{$tracks_search}" class="tabs_action ai {if $in != 'playlists'}aslnk{/if}" tabindex="0">{$this->lang['Tracks']}<i id="mus_header_my_tracks_count" class="tabs_action_counter ">{$count_tracks}</i></a></li>
+        <li class="tabs_item"><a hrefattr="true" id="mus_header_mycol" href="{$playlists_search}" class="tabs_action ai {if $in == 'playlists'}aslnk{/if}" tabindex="0">{$this->lang['Playlists']}<i class="tabs_action_counter ">{$count_playlists}</i></a></li>
+
+
+ </ul>
+</nav>
+
+
+<div class="music_track_lst-w">
+
+{if $in == 'playlists'}
+    <ul class="music_album_lst_grid">
+{foreach $query as $collection}
+{assign var=pl_cover value=urldecode($collection.favorite_cover)}
+
+{if strstr($pl_cover, 'mp3_covers')}
+
+{assign var=pl_cover value="{urldecode($collection.favorite_cover)}"}
+{/if}
+
+	<li class="music_album_i m8" data-func="open" role="link">
+	<A class="mobmusic-album-a" href="/mmusic/collection/{$collection.id}" hrefattr="true">
+	{if $collection.favorite_cover}<img class="music_album_img" src="{$pl_cover}">{/if}
+            <div class="music_album_name-w">
+                <div class="music_album_name">{urldecode($collection.name)}</div>
+            </div>
+			</a>
+        </li>
+		
+{foreachelse}
+
+{$this->lang['no_mus_playlists_on_site_at_the_momment']}
+{/foreach}
+</ul>
+
+
+{else}
+<ul class="music_track_lst">
+
+{foreach $query as $track}
+
+    <li class="music_track_i" id="track_{$track.id}">
+	
+        <div class="music_track_aux">
+		
+		<span class="music_track_time music_track_seek"><span></span>&nbsp;/&nbsp;</span>
+		
+		<span class="music_track_time">{$track.time}</span>
+		
+		<a class="music_add" data-func="add" role="button"></a>
+		
+		<a class="music_more" data-track-ap='{ldelim}"id":"pm_sec_track_{$track.id}","artist":"{urlencode($track.artist)}","track_title":"{urlencode($track.title)}"{rdelim}' onclick="trackSet(this,event);" data-func="menu" role="button"></a>
+		
+		</div>
+		
+        <div class="music_track_cnt">
+		
+ 
+		
+		<div class="mob-play-track-button pButton" onclick="mmPlay(this,event);" data-mob-track='{ldelim}"time":"{$track.time}","id":"mob-track-{$track.id}","artist":"{urlencode($track.artist)}","track_name":"{urlencode($track.title)}","album_name":"{urlencode($track.album)}","file":"{$this->track_path($track.path,$track.storage)}","cover":"{$this->cover_path($track.cover,$track.storage)}"{rdelim}'>
+		<div class="ai_play" style="background-image:url({$track.cover})"><i class="i_play"></i></div>
+		<div class="mob-audio-placeholder"></div>
+		</div>
+		
+		<span class="music_track_data">
+		
+		<span class="music_track_artist" data-func="goToArtist" role="link">{$track.artist}</span>
+		
+		<span class="music_track_album">{$track.title}</span></span>
+
+        </div>
+
+    </li>
+{foreachelse}
+<div class="mobmus-empty">
+{$this->lang['no_tracks_found']}
+</div>
+{/foreach}
+
+</ul>
+{/if}
+
+
+
+</div>
+
+
+
+
+{include file={$_musfooter}}
+
+
+{/strip}

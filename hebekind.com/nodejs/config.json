@@ -1,0 +1,10 @@
+{
+    "sql_db_host": "185.224.138.133",
+    "sql_db_user": "u631248999_socialnetwork",
+    "sql_db_pass": "Success@2020",
+    "sql_db_name": "u631248999_socialnetwork",
+    "site_url": "https://www.hebekind.com",
+    "nodejs_key":"./certificate/private.key",
+    "nodejs_cert":"./certificate/certificate.crt",
+    "purchase_code": "550bc698-c81a-4870-b056-e07d2398c7ee"
+}

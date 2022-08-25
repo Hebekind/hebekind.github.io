@@ -1,0 +1,48 @@
+{strip}
+
+{if !$is_json}
+<div class="vy-mobile-music-container" id="mmusic_container">
+{/if}
+{if !isset($change_header)}
+<div data-headername="{$this->lang['Home']}" data-backhref="/?{time()}" id="modifyheader"></div>
+{/if}
+
+<div class="music-search-form">
+    <div class="field input-text __has-icon __plain __search __active">
+        <div class="input-text_visual">
+            <div class="input-text_visual_inner"><div class="mus-search-ic"></div><input class="input-text_element search_input" id="musicSearchField" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" data-func="inputInteraction" placeholder="Search for music" maxlength="250" type="text">
+                <div class="input-text_icons">
+				<label class="input-text_icon-w __search" for="musicSearchField" aria-hidden="true">
+				<span class="ic  ic-search input-text_icon __empty ic16"></span></label>
+			
+				<div class="ui_search_reset" style="display:none;" id="mus_search_clear" onclick="ga('#musicSearchField').val('').focus();ga(this).hide();"><span class="blind_label">Cancel</span></div>
+				<a href="/music/search/" style="display:none;" id="mus-search-a" hrefattr="true"></a>
+				
+				<label class="input-text_icon-w __progress" for="musicSearchField" aria-hidden="true">
+				<span class="ic  ic-progress input-text_icon __empty ic16"></span></label></div>
+				<label for="musicSearchField" class="input-text_visual_bg"></label></div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="music_content">
+<div class="upload-bar" id="mus-upload-bar"><ul></ul></div>
+
+<nav role="navigation" class="tabs">
+    <ul class="tabs_list js-tabs-list" role="menu">
+		<li class="tabs_item"><a hrefattr="true" href="/mmusic/popular" class="tabs_action ai {if $cmd == 'popular'}aslnk{/if}" tabindex="0">{$this->lang['Popular']}<i class="tabs_action_counter hidden"></i></a></li>
+	
+        <li class="tabs_item"><a hrefattr="true" href="/mmusic/mytracks" class="tabs_action ai {if $cmd == 'mytracks'}aslnk{/if}" tabindex="0">{$this->lang['mus_my_music']}<i id="mus_header_my_tracks_count" class="tabs_action_counter ">{count($this->myTracks())}</i></a></li>
+        <li class="tabs_item"><a hrefattr="true" id="mus_header_mycol" href="/mmusic/myplaylists" class="tabs_action ai {if $cmd == 'myplaylists'}aslnk{/if}" tabindex="0">{$this->lang['mus_my_collections']}<i class="tabs_action_counter ">{$this->myCollectionsCount()}</i></a></li>
+
+
+<li class="tabs_item" style="display:none;"><a href="/mmusic/mytracks?v={time()}" id="go_to_my_music" class="tabs_action ai" hrefattr="true" tabindex="0">&nbsp;</a></li>
+
+ </ul>
+ 
+
+ 
+</nav>
+{/strip}

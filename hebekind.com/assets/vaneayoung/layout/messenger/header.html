@@ -1,0 +1,88 @@
+
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto%3A300%7CUbuntu+Condensed%7CUbuntu%7CRaleway%3A300%2C500%2C400%7CPT+Sans+Narrow&ver=4.3.1" type="text/css" media="all">
+		<link rel="stylesheet" type="text/css" href="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/nanoScroll/css/nanoscroller.css?v=<?php echo $wo['vy-messenger']['version'];?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/lightgallery/css/lightgallery.css?v=<?php echo $wo['vy-messenger']['version'];?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/confirm-dialog/css/jquery-confirm.min.css?v=<?php echo $wo['vy-messenger']['version'];?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo $wo['config']['theme_url'];?>/stylesheet/vaneayoung/messenger.min.css?v=<?php echo $wo['vy-messenger']['version'];?>">
+		<link rel="stylesheet" <?php echo isset($_COOKIE['mode']) && $_COOKIE['mode'] == 'night' ? '' : 'disabled';?> id="messenger-dark-mode-theme" type="text/css" href="<?php echo $wo['config']['theme_url'];?>/stylesheet/vaneayoung/messenger-dark.min.css?v=<?php echo $wo['vy-messenger']['version'];?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/emojiarea/dist/emojionearea.min.css?v=<?php echo $wo['vy-messenger']['version'];?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo $wo['config']['theme_url'];?>/stylesheet/vaneayoung/social_icons.css?v=<?php echo $wo['vy-messenger']['version'];?>">
+		<script> 
+		var lang = <?php echo json_encode(MESSENGER::getMLang());?>,
+		vy_ms__mygroups = <?php echo json_encode(MESSENGER::myGroups());?>,
+		vy_ms_mdcontacts = <?php echo json_encode(MESSENGER::out_getMyMutedContacts());?>,
+		vy_ms_svgi = <?php echo json_encode(MESSENGER::getSvgIcons());?>,
+		vy_ms_colors = <?php echo json_encode(MESSENGER::messColors());?>,
+		vy_ms_v = "<?php echo $wo['vy-messenger']['version'];?>",
+		vy_ms_timezone = "<?php echo $wo['vy-messenger']['config']['timezone'];?>",
+		__SITENAME = "<?php echo $wo['config']['siteName'];?>",
+		_U = {i:<?php echo $wo['user']['user_id'];?>,ip:"<?php echo $_SERVER['REMOTE_ADDR'];?>",p:"<?php echo $wo['user']['avatar'];?>",last_name:"<?php echo empty($wo['user']['last_name']) ? $wo['user']['username'] : $wo['user']['last_name'];?>",first_name:"<?php echo empty($wo['user']['first_name']) ? $wo['user']['username'] : $wo['user']['first_name'];?>",username:"<?php echo $wo['user']['username'];?>",fn:"<?php echo (empty($wo['user']['first_name']) ? $wo['user']['username'] : $wo['user']['first_name'].' '.$wo['user']['last_name']);?>"},
+		chat_default_color = "<?php echo $wo['vy-messenger']['config']['chat']['default_color'];?>",
+		_BLANK= 'data:image/gif;base64,R0lGODlhAQABAJH/AP///wAAAMDAwAAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw==',
+		THEME_URL = '<?php echo $wo["config"]["theme_url"];?>',
+		V_HOST = '<?php echo $wo["site_url"];?>',
+		V_WS_ADDR = '<?php echo str_replace(".","",$_SERVER["SERVER_ADDR"]);?>',
+		VY_MS_BBCODES = '<?php echo(BBCODES);?>',
+		V_EMOJIS = "<?php echo $wo['site_url'];?>/assets/vaneayoung/layout/messenger/emojis/",
+		_emojiVersion = 'joypixels-v6.0',
+		_emojiDefaultSize = 64,
+		_emojiOne_CDN_loaded = false,
+		anonym_content = 0, 
+		messenger_limit = 15,
+		msgs_count = 0, 
+		gl_scrollChatDelay = false,
+		messenger,
+		sio,
+		vy_ms__window_tab_active=true, 
+		my_contacts = [],
+		group_chats = [],
+		xhrPool = [],
+		_target_evt = {},
+		global_emit = {},
+		g_messenger_count = {},
+		vy_calls = function(){};
+ 
+		</script>
+ 
+		<script>
+		var NODEJS_ENABLED=true,
+			CHAT_HOST_NAME = "<?php echo $wo['vy-messenger']['config']['chat']['hostname'];?>",
+			CHAT_PORT = "<?php echo $wo['vy-messenger']['config']['chat']['port'];?>",
+			CHAT_NODE_HOST = CHAT_HOST_NAME+':'+CHAT_PORT,
+			PEER_HOST_NAME = "<?php echo $wo['vy-messenger']['config']['peer']['hostname'];?>",
+			PEER_PATH = "<?php echo $wo['vy-messenger']['config']['peer']['path'];?>",
+			PEER_PORT = "<?php echo $wo['vy-messenger']['config']['peer']['port'];?>",
+			PEER_NODE_HOST = PEER_HOST_NAME+':'+PEER_PORT,
+			messenger_code = "<?php echo hexdec(crc32($wo['vy-messenger']['config']['p_key']));?>";
+		</script> 
+		
+		<script id="vy_ms__iceservers">
+		var iceservers_stun = "<?php echo $wo['vy-messenger']['config']['iceserver']['stun'];?>"; 
+		var iceservers_turn = "<?php echo $wo['vy-messenger']['config']['iceserver']['turn'];?>"; 
+		var iceservers_cr = "<?php echo $wo['vy-messenger']['config']['iceserver']['credential'];?>"; 
+		var iceservers_un = "<?php echo $wo['vy-messenger']['config']['iceserver']['username'];?>"; 
+		</script>
+		
+		
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/timeago.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/soundmanager2-jsmin.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>
+		
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/peer.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/system.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/socket.io-1.2.0.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>  
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/emojiarea/dist/emojionearea.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/emojiarea/dist/joypixels.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/liveNotifications.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/tinysort.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script> 
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/webrtc-calls.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/messenger.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>  
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/messenger-shortcut.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/nanoScroll/javascripts/overthrow.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/nanoScroll/javascripts/jquery.nanoscroller.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/lightgallery/js/lib/jquery.mousewheel.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/lightgallery/js/lightgallery-all.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/confirm-dialog/js/jquery-confirm.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>
+		<script  type="text/javascript" src="<?php echo $wo['config']['theme_url'];?>/javascript/vaneayoung/clipboard.min.js?v=<?php echo $wo['vy-messenger']['version'];?>"></script>
+ 
+	   
+	  

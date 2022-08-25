@@ -1,0 +1,50 @@
+<script>
+if(typeof lang == 'undefined') {var lang = {};}
+    if (typeof __j == 'undefined') {
+        var __j = function(a) {
+            return $(a);
+        };
+    }
+</script>
+
+<!-- music -->
+<link rel="stylesheet" type="text/css" href="<?php echo $wo['config']['site_url'];?>/music/css/style.css?v=1.2">
+<link rel="stylesheet" type="text/css" href="<?php echo $wo['config']['site_url'];?>/music/mobile/css/audio.css?v=1.2">
+<link rel="stylesheet" type="text/css" href="<?php echo $wo['config']['site_url'];?>/music/mobile/css/music.css?v=1.2">
+<script type="text/javascript" src="<?php echo $wo['config']['site_url'];?>/music/js/initialize.MusicModule.js?v=1.2"></script>
+<script type="text/javascript" src="<?php echo $wo['config']['site_url'];?>/music/mobile/js/mobile-mus.js?v=1.2"></script>
+	 
+	 
+<script>
+
+$('#music-module').MusicModule({ 
+
+// define the path of music files 
+	    music_path: '/music/', 
+
+// initialize file name 
+	    p_file: '/index.html', 
+
+// where append the popup box 
+	    append_to: 'body', 
+
+// choose your favorite open method, use 'default' or 'overlay' 
+	    open_method: 'overlay',
+
+// set left position of popup box in px 
+            p_left: $('.content-container').offset().left + parseInt($('.content-container').css('padding-left')),//($(window).width() - $('#page_layout').width())/2,
+
+// set top position of popup box in px 
+            p_top: '0',
+
+// enable|disable window modal 
+            w_modal: true,
+
+// this is a callback before open the popup box 
+	    beforeOpen: function(){ }
+
+});
+ 
+ 
+</script>
+	  

@@ -1,0 +1,43 @@
+{strip}
+ 
+ <div data-headername="{$this->lang['mus_my_music']}" data-backhref="/music/mytracks" id="modifyheader"></div>
+
+{include file={$_musheader}}
+ 
+ 
+
+ 
+ <div class="text_panel">{$this->lang['mus_create_collection']}</div>	
+<div class="pcont padding">	
+ <div id="new_album_create"></div>
+
+<form name="mus_new_Album" action="/mmusic.php" method="post">
+<input type="hidden" name="cmd" value="createCollection" />
+
+<div class="mt30">
+<div class="form_i">
+ <span class="input-l f18">
+ <label for="mus_colNam">{$this->lang['sg_name']}</label>
+</span>
+   <div class="it_w pt5">
+       <input type="text" name="st.layer.col.name" value="" id="mus_colNam" class="it it_w__3gc pl14 h40 f14" cols="35" maxlength="80" rows="3">
+        </div>
+
+
+        
+ 
+  	<div class="mt25"></div>
+	
+	
+        <div class="bott_btn">
+            <button name="button_plpscp_confirm" onclick="doNewCollection(this.form,event)" type="submit" class="button wide_button">{$this->lang['create']}</button>
+             
+	</div>
+</div>
+    </form>
+ 
+</div>
+</div>
+
+{include file={$_musfooter}}
+{/strip}

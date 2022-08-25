@@ -1,0 +1,58 @@
+{strip}
+{assign var=change_header value=true}
+<div data-headername="{$uname} - {str_replace('%s',$count,$this->lang['added_tracks'])}" data-backhref="/user/{$uid}" id="modifyheader"></div>
+{include file={$_musheader}}
+ 
+ 
+
+<div class="music_track_lst-w">
+ 
+<ul class="music_track_lst">
+
+{foreach $tracks as $track}
+
+    <li class="music_track_i" id="track_{$track.id}">
+	
+        <div class="music_track_aux">
+		
+		<span class="music_track_time music_track_seek"><span></span>&nbsp;/&nbsp;</span>
+		
+		<span class="music_track_time">{$track.time}</span>
+		
+		<a class="music_add" data-func="add" role="button"></a>
+		
+		<a class="music_more" data-track-ap='{ldelim}"id":"pm_sec_track_{$track.id}","artist":"{urlencode($track.artist)}","track_title":"{urlencode($track.title)}"{rdelim}' onclick="trackSet(this,event);" data-func="menu" role="button"></a>
+		
+		</div>
+		
+        <div class="music_track_cnt">
+		
+ 
+		<div class="mob-play-track-button pButton" onclick="mmPlay(this,event);" data-mob-track='{ldelim}"time":"{$track.time}","id":"mob-track-{$track.id}","artist":"{urlencode($track.artist)}","track_name":"{urlencode($track.title)}","album_name":"{urlencode($track.album)}","file":"{$this->track_path($track.path,$track.storage)}","cover":"{$this->cover_path($track.cover,$track.storage)}"{rdelim}'>
+		<div class="ai_play" style="background-image:url({$track.cover})"><i class="i_play"></i></div>
+		<div class="mob-audio-placeholder"></div>
+		</div>
+		<span class="music_track_data">
+		
+		<span class="music_track_artist" data-func="goToArtist" role="link">{$track.artist}</span>
+		
+		<span class="music_track_album">{$track.title}</span></span>
+
+        </div>
+
+    </li>
+{foreachelse}
+<div class="mobmus-empty">
+{$this->lang['you_dont_have_tracks']}
+</div>
+{/foreach}	
+	
+</ul>
+
+</div>
+
+
+{include file={$_musfooter}}
+
+
+{/strip}

@@ -1,0 +1,103 @@
+/* Absolute Center */
+.abs-center{
+	margin: auto;
+	position: fixed;
+	top:0; right:0; bottom:0; left:0;
+}
+/*Container for audio player
+#audioplayer{
+	width: 480px;
+	height: 60px;
+	margin: auto;
+	margin-top: 50px;
+	border: solid;
+}*/
+/* Play/Pause Button */
+#pButton{
+	/*height:60px;
+	width: 60px;
+	border: none;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+	background-position: center;
+	float:left;
+	outline:none;*/
+
+}
+
+.track_timeline {
+    position: ABSOLUTE;
+    bottom: 0;
+    height: .5em;left:0;
+    width: 100%;
+    margin: auto;
+    padding: 0;
+    clear: both;
+    background-color: #e0e0e0;
+    background-image: -webkit-gradient(linear,left top,right top,from(#c8c8c8),to(#c8c8c8));
+    background-image: -webkit-linear-gradient(left,#c8c8c8,#c8c8c8);
+    background-image: linear-gradient(to right,#c8c8c8,#c8c8c8);
+    background-repeat: no-repeat;
+    -webkit-transition: background-size .4s ease-out;
+    transition: background-size .4s ease-out;
+}
+.m_portal_tracks .track_timeline {
+    position: absolute;
+    margin-left: 21px;
+}
+.commentsWidgetTracks .track_timeline{
+position: relative;
+    margin: 10px 0;
+}
+/*Grabable Playhead*/
+.track_playhead{
+    position: absolute;
+    z-index: 2;
+    top: -6px;
+    display: block;
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 50px;
+    background-color: #ccc;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,0)),to(rgba(0,0,0,.05)));
+    background-image: -webkit-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,.05));
+    background-image: linear-gradient(to bottom,rgba(0,0,0,0),rgba(0,0,0,.05));
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.55);
+    box-shadow: 0 1px 2px rgba(0,0,0,.55);
+    -webkit-transition: height .2s ease,width .2s ease,top .2s ease,right .2s ease;
+    transition: height .2s ease,width .2s ease,top .2s ease,right .2s ease;
+}
+.music_track_i.__rewind .music_track_progress-a:active {
+    height: 26px;
+    width: 10px;
+    top: .1em;
+    right: -3px;
+    border-radius: 3px;
+}
+
+.music_track_i.__rewind .music_track_progress-a {
+    background-image: -webkit-gradient(linear,left bottom,left top,from(rgba(0,0,0,0)),to(rgba(0,0,0,.15)));
+    background-image: -webkit-linear-gradient(bottom,rgba(0,0,0,0),rgba(0,0,0,.15));
+    background-image: linear-gradient(to top,rgba(0,0,0,0),rgba(0,0,0,.15));
+}
+.mobmus-seekbar {
+    position: absolute;
+    background: #366175;
+    height: 100%;
+    width:0;	z-index:1;
+}.mobmus-buffbar {
+    position: absolute;
+
+    height: 100%;
+    width:0;
+
+
+    clear: both;
+    background-color: #e0e0e0;
+    background-image: -webkit-gradient(linear,left top,right top,from(#cacaca),to(#adadad));
+    background-image: -webkit-linear-gradient(left,#cacaca,#adadad);
+    background-image: linear-gradient(to right,#cacaca,#adadad);
+    background-repeat: no-repeat;
+    -webkit-transition: background-size .4s ease-out;
+    transition: background-size .4s ease-out;
+}

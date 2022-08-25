@@ -1,0 +1,71 @@
+
+@media (min-width:1351px) {
+
+.layer_cnt {
+ 
+    top: 0px;
+	bottom:unset;
+	width:100%!important;
+	height:100%!important;
+}
+}
+.mus_margin {
+    margin-top: 0px;
+    margin-left: 0px;
+}
+
+ 
+.controls_btn {
+ 
+    top: 13px!important;
+}
+.mini_player_song_info {
+    font-size: 10.5px!important;
+}
+
+@media (max-width: 1150px){
+	
+	
+}/*
+@media (min-width:1351px) {
+	
+.tag_hdr_right {
+ 
+    top: 22px!important;
+    
+ 
+}
+	
+}
+
+.tag_header_top_p .tag_hdr_right {
+	top:0!important;
+	
+}*/
+
+.tag_header_top_p .layer_cnt {
+    top: 56px!important;
+    bottom: inherit!important;
+    height: calc(100% - 60px)!important;
+}
+
+.header_mus_player.__on .controls_btn .glyphicon {
+    color: #000;
+}
+.header_mus_player.__on .controls_btn .glyphicon:hover {
+    color: #333;
+}
+#mmusic_top_header_ic svg {
+	fill:#000!important;
+}
+.header_mus_player {
+ 
+    display: none;
+}
+
+.m_search .ml-5 {
+    margin-left: 10px!important;
+}.mus_back {
+    
+    top: 6px!important;
+}
